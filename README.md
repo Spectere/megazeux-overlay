@@ -13,9 +13,25 @@ For more information, including a library of available games, please visit
 ## Installing MegaZeux
 
 The first step is to add this overlay to your system. There are two ways of doing this:
-by managing a repos.conf file yourself and using layman.
+by using layman or by creating a repos.conf file for the overlay yourself.
+
+### The layman Method
+
+This method requires you to touch fewer files by hand and will probably work best for most
+users.
+
+After installing [layman](https://wiki.gentoo.org/wiki/Layman), bring open your terminal of
+choice and run the following as `root`:
+
+`layman -o https://raw.githubusercontent.com/Spectere/megazeux-overlay/master/megazeux-layman.xml -f -a megazeux`
+
+You should now be able to simply `emerge megazeux`!
 
 ### repos.conf Method
+
+This method works well but requires a little bit of manual effort to get set up. If you
+don't feel like messing around with your portage configuration files directly, give the
+layman method a try first.
 
 First, you'll need to create a directory to house this overlay's ebuild files. Personally,
 I store this overlay in `/usr/local/portage/megazeux`.
@@ -37,9 +53,36 @@ The overlay is now set up to automatically sync when you run `emerge --sync`. Do
 it will retrieve the overlay and place it in your chosen directory. From here, you can simply
 `emerge megazeux` and begin playing and creating.
 
-### The layman Method
+## USE Flags
 
-TODO: Write this. :(
+This ebuild currently supports the following USE flags:
 
-In the meantime, this link should help you get up and running:
-https://wiki.gentoo.org/wiki/Layman#Adding_custom_repositories
+    * `mikmod` - *(global)* Uses `media-libs/libmikmod` to decode module music files.
+    * `sdl-legacy` - *(local)* Uses `media-libs/libsdl` instead of `media-libs/libsdl2`. SDL2
+                     is highly recommended, but SDL1 works fine if you are unable to use SDL2
+                     or would prefer not to.
+    * `tremor` - *(local)* Uses `media-libs/tremor` to decode Vorbis audio instead of
+                 `media-libs/libvorbis`. Tremor is better suited for older and embedded
+                 systems.
+    * `vorbis` - *(global)* Enables support for `media-libs/libvorbis`.
+    * `xmp` - *(local)* Uses libxmp (included in MegaZeux) to decode module music files.
+
+This ebuild is designed to mimick the default canonical MegaZeux distribution as closely as
+possible by default. This results in the following design choices:
+
+    * **SDL1 and SDL2 selection is done differently than in other Gentoo packages.** While
+      MegaZeux has solid SDL1 support and continues to support it, most of the testing is done
+      using SDL2 builds. Therefore, instead of defaulting to SDL1 and requiring a flag to
+      use SDL2, MegaZeux uses SDL2 by default unless the `sdl-legacy` flag is set.
+    * **libxmp is the preferred module playback system.** MegaZeux only supports being built
+      with a single module file decoder. Furthermore, MegaZeux's preferred module player is
+      contained within its source tarball and is not in portage. This player, `libxmp`, is
+      enabled by default and is used unless the `xmp` flag is explicitly disabled. This was
+      done to allow users to keep the `mikmod` flag enabled globally while ensuring that the
+      most well-supported decoder is enabled by default. If no supported module loaders are
+      selected, module music playback will be disabled.
+    * **`tremor` overrides `vorbis`.** As with the module decoders, only a single Vorbis
+      decoder can be compiled into MegaZeux at any given time. If both `vorbis` and `tremor`
+      are specified, `libtremor` will be used. If `tremor` is set and `vorbis` is unset,
+      `libtremor` will still be used. Finally, if neither of these USE flags are enabled,
+      Vorbis playback will be disabled.
