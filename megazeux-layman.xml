@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<repositories xmlns="" version="1.0">
+	<repo priority="10" quality="experimental" status="unofficial">
+		<name>megazeux</name>
+		<description>A text-based game creation system.</description>
+		<homepage>https://www.digitalmzx.net/</homepage>
+		<owner>
+			<name>Ian Burgmyer</name>
+			<email>spectere@gmail.com</email>
+		</owner>
+		<source type="git">https://github.com/Spectere/megazeux-overlay.git</source>
+	</repo>
+</repositories>
