@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>spectere@gmail.com</email>
+		<name>Ian Burgmyer</name>
+	</maintainer>
+	<longdescription lang="en">
+		A text-based game creation system.
+	</longdescription>
+	<use>
+		<flag name="sdl-legacy">Use libsdl instead of libsdl2</flag>
+		<flag name="tremor">Use media-libs/tremor instead of media-libs/libvorbis</flag>
+		<flag name="xmp">Use libxmp for module playback (recommended!)</flag>
+	</use>
+</pkgmetadata>
