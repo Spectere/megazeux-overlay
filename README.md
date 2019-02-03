@@ -25,7 +25,9 @@ choice and run the following as `root`:
 
 `layman -o https://raw.githubusercontent.com/Spectere/megazeux-overlay/master/megazeux-layman.xml -f -a megazeux`
 
-You should now be able to simply `emerge megazeux`!
+You should now be able to simply `emerge megazeux`! Be sure to run `layman -S` once in a
+while to sync all of your layman repositories (or `layman -s megazeux` to only sync this
+one).
 
 ### repos.conf Method
 
