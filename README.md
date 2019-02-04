@@ -25,6 +25,11 @@ choice and run the following as `root`:
 
 `layman -o https://raw.githubusercontent.com/Spectere/megazeux-overlay/master/megazeux-layman.xml -f -a megazeux`
 
+Next, the package will need to be unmasked in order for you to emerge it. This will take
+care of that:
+
+`echo games-engines/megazeux > /etc/portage/package.keywords/megazeux`
+
 You should now be able to simply `emerge megazeux`! Be sure to run `layman -S` once in a
 while to sync all of your layman repositories (or `layman -s megazeux` to only sync this
 one).
@@ -52,8 +57,17 @@ priority = 10
 **Note:** Be sure to change the `location` attribute if you are placing the overlay elsewhere.
 
 The overlay is now set up to automatically sync when you run `emerge --sync`. Do so now and
-it will retrieve the overlay and place it in your chosen directory. From here, you can simply
-`emerge megazeux` and begin playing and creating.
+it will retrieve the overlay and place it in your chosen directory.
+
+Next, the package will have to be unmasked before it can be emerged. This can be accomplished
+by executing this as root:
+
+Next, the package will need to be unmasked in order for you to emerge it. This will take
+care of that:
+
+`echo games-engines/megazeux > /etc/portage/package.keywords/megazeux`
+
+From here, you can simply `emerge megazeux` and begin playing and creating.
 
 ## USE Flags
 
