@@ -75,6 +75,8 @@ This ebuild currently supports the following USE flags:
 
 * `mikmod` - *(global)* Uses `media-libs/libmikmod` to decode module music files.
 
+* `modplug` - *(global)* Uses libmodplug (in tree) to decode module music files.
+
 * `sdl-legacy` - *(local)* Uses `media-libs/libsdl` instead of `media-libs/libsdl2`. SDL2
                  is highly recommended, but SDL1 works fine if you are unable to use SDL2
                  or would prefer not to.
@@ -98,9 +100,21 @@ possible by default. This results in the following design choices:
   with a single module file decoder. Furthermore, MegaZeux's preferred module player is
   contained within its source tarball and is not in portage. This player, `libxmp`, is
   enabled by default and is used unless the `xmp` flag is explicitly disabled. This was
-  done to allow users to keep the `mikmod` flag enabled globally while ensuring that the
-  most well-supported decoder is enabled by default. If no supported module loaders are
-  selected, module music playback will be disabled.
+  done to allow users to keep the other module player flags enabled globally while ensuring
+  that the most well-supported decoder is enabled by default. If no supported module loaders
+  are selected, module music playback will be disabled.
+
+* **If libxmp is disabled, either libmikmod or libmodplug must be selected.** As stated
+  above, libxmp will be used by default. If it is disabled and module playback is still
+  desired, either `mikmod` or `modplug` must be enabled. If both are enabled, the ebuild
+  will fail. If you wish to keep both USE flags enabled for other packages, please create
+  a file in your `/etc/portage/package.use` directory to explicitly disable the undesired
+  player. Again, if you wish to use libxmp, simply leave the `xmp` USE flag enabled and it
+  will be preferred.
+
+* **The `modplug` USE flag does *not* use `media-libs/libmodplug`.** MegaZeux includes a
+  customized version of libmodplug in its source tree. If libmodplug support is selected,
+  the in-tree version of libmodplug will be used and compiled statically.
 
 * **`tremor` overrides `vorbis`.** As with the module decoders, only a single Vorbis
   decoder can be compiled into MegaZeux at any given time. If both `vorbis` and `tremor`
