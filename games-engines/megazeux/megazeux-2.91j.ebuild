@@ -56,14 +56,6 @@ src_configure() {
 		mod_conf="--disable-xmp"
 	fi
 
-	#if use xmp && use mikmod ; then
-	#	ewarn "Both the xmp and mikmod USE flags are defined. Using libxmp."
-	#elif ! use xmp && use mikmod ; then
-	#	mod_conf="--enable-mikmod"
-	#elif ! use xmp && ! use mikmod ; then
-	#	mod_conf="--disable-xmp"
-	#fi
-
 	if ! use vorbis && ! use tremor ; then
 		ogg_conf="--disable-vorbis"
 	elif use tremor ; then
