@@ -12,7 +12,6 @@ SRC_URI="https://vault.digitalmzx.net/download.php?rid=2384&f=c641a2550178667a55
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-#IUSE="mikmod modplug -sdl-legacy -tremor vorbis +xmp"
 IUSE="mikmod modplug -sdl-legacy -tremor vorbis +xmp"
 
 DEPEND="media-libs/libpng:0
@@ -31,7 +30,6 @@ src_configure() {
 	local mod_conf
 	local ogg_conf
 
-	# Modplug builds are broken in v2.91i so let's just save this for later. :)
 	if use xmp && ( use modplug || use mikmod ) ; then
 		ewarn "Both xmp and modplug and/or mikmod USE flags were defined. Using libxmp."
 	elif ! use xmp && ( use modplug && use mikmod ) ; then
