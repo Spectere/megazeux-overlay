@@ -7,7 +7,7 @@ inherit desktop
 
 DESCRIPTION="A text-based game creation system."
 HOMEPAGE="https://www.digitalmzx.net/"
-SRC_URI="https://vault.digitalmzx.net/download.php?rid=2407&f=841cf520002b6807ca2a11368be7942fd3eea8dc85f59b1cea07a7fba48e6c1e -> ${PF}.tar.xz"
+SRC_URI="https://vault.digitalmzx.net/download.php?latest=src&ver=${PV} -> ${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,7 +24,7 @@ DEPEND="media-libs/libpng:0
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-S="${WORKDIR}/mzx292"
+S="${WORKDIR}/mzx$(ver_rs 1-2 '')"
 
 src_configure() {
 	local mod_conf
