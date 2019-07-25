@@ -68,10 +68,10 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	# Rename the documents directory to follow FHS/Gentoo conventions.
-	mv "${D}"/usr/share/doc/megazeux "${D}"/usr/share/doc/"${P}"
+	mv "${D}"/usr/share/doc/megazeux "${D}"/usr/share/doc/"${PF}"
 
 	# Un-gzip the documentation so that portage can handle it.
-	for f in "${D}"/usr/share/doc/"${P}"/*.gz; do
+	for f in "${D}"/usr/share/doc/"${PF}"/*.gz; do
 		gunzip "${f}"
 	done
 
