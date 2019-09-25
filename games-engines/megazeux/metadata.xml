@@ -9,6 +9,7 @@
 		A text-based game creation system.
 	</longdescription>
 	<use>
+		<flag name="rad">Enable support for Reality Adlib Tracker modules</flag>
 		<flag name="sdl-legacy">Use libsdl instead of libsdl2</flag>
 		<flag name="tremor">Use media-libs/tremor instead of media-libs/libvorbis</flag>
 		<flag name="xmp">Use libxmp for module playback (recommended!)</flag>

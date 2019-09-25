@@ -12,7 +12,7 @@ SRC_URI="https://vault.digitalmzx.net/download.php?latest=src&ver=${PV} -> ${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="mikmod modplug -sdl-legacy -tremor vorbis +xmp"
+IUSE="mikmod modplug +rad -sdl-legacy -tremor vorbis +xmp"
 
 DEPEND="media-libs/libpng:0
 		!sdl-legacy? ( media-libs/libsdl2 )
@@ -54,6 +54,10 @@ src_configure() {
 		mod_conf="--disable-xmp"
 	fi
 
+	if ! use rad ; then
+		rad_conf="--disable-rad"
+	fi
+
 	if ! use vorbis && ! use tremor ; then
 		ogg_conf="--disable-vorbis"
 	elif use tremor ; then
@@ -61,7 +65,7 @@ src_configure() {
 		ogg_conf="--enable-tremor"
 	fi
 
-	./config.sh --platform unix --prefix /usr --sysconfdir /etc --gamesdir /usr/bin $(use_enable !sdl-legacy libsdl2) ${ogg_conf} ${mod_conf}
+	./config.sh --platform unix --prefix /usr --sysconfdir /etc --gamesdir /usr/bin $(use_enable !sdl-legacy libsdl2) ${ogg_conf} ${mod_conf} ${rad_conf}
 }
 
 src_install() {
