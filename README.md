@@ -60,10 +60,8 @@ The overlay is now set up to automatically sync when you run `emerge --sync`. Do
 it will retrieve the overlay and place it in your chosen directory.
 
 Next, the package will have to be unmasked before it can be emerged. This can be accomplished
-by executing this as root:
-
-Next, the package will need to be unmasked in order for you to emerge it. This will take
-care of that:
+by executing this as root (note: you'll need to execute this from a root shell, via `sudo -s`
+or `su`, otherwise this won't function as expected):
 
 `echo games-engines/megazeux > /etc/portage/package.keywords/megazeux`
 
